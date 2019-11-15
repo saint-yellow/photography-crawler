@@ -4,63 +4,50 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-from .database import engine, Session, PhotoCollection, PhotoDetail
-from .items import PhotoCollectionItem, PhotoDetailItem
+from .database import engine, Session, PhotoSet
+from .items import PhotoSetItem, PhotoDetailItem
 from scrapy import Spider
 from scrapy.pipelines.images import ImagesPipeline
+from scrapy.http import Request
+from datetime import datetime
+import arrow
+from scrapy.exceptions import DropItem
+import os
 
-class SihaizixunPipeline(object):
+class PhotoSetPipeline(object):
     def __init__(self):
         self.session = Session()
 
-
-    def open_spider(self, spider):
-        pass
-
-
     def process_item(self, item, spider: Spider):
-        if isinstance(item, PhotoCollectionItem):
-            photo_collection = PhotoCollection(
-                url=item['url'],
-                title=item['title'], 
-                author=item['author'],
-                source=item['source'], 
-                datetime_published=item['datetime_published'],
-                description=item['description'],
-                tags=item['tags'])
-            self.session.add(photo_collection)
-            self.session.commit()
-        if isinstance(item, PhotoDetailItem):
-            photo_infomation = PhotoDetail(
-                title=item['title'],
-                webpage_url=item['webpage_url'],
-                photo_url=item['photo_url'])
-            self.session.add(photo_infomation)
-            self.session.commit()
+        record = PhotoSet(
+            url=item['url'],
+            title=item['title'], 
+            author=item['author'],
+            source=item['source'], 
+            datetime_published=item['datetime_published'],
+            description=item['description'],
+            tags=item['tags'])
+        self.session.add(record)
+        self.session.commit()
         
-
     def close_spider(self, spider: Spider):
         self.session.close()
 
 
-class PhotoDownloadingPipeline(ImagesPipeline):
-    def __int__(self):
-        pass
+class PhotoPipeline(ImagesPipeline):
+    def get_media_requests(self, item: PhotoDetailItem, info):
+        for photo_url in item['photo_urls']:
+            yield Request(photo_url, meta={'name': item['notation']}, headers={'Referer': item['webpage_url']})
 
-    def open_spider(self, spider: Spider):
-        pass
-
-    def process_item(self, item: PhotoDetailItem, spider: Spider):
-        pass
-
-    def close_spider(self):
-        pass
+    def file_path(self, request: Request, response=None, info=None):
+        photo_extension = request.url.split('.')[-1]
+        file_name = request.meta['name'] + '-' + str(arrow.get(datetime.now()).timestamp) + '.' + photo_extension
+        return os.path.join(request.meta['name'], file_name)
 
     def item_completed(self, results, item, info):
-        pass
-
-    def get_images(self, response, request, info):
-        pass
-
-    def get_media_requests(self, item, info):
-        pass
+        print(results)
+        photo_paths = [x['path'] for ok, x in results if ok]
+        if not photo_paths:
+            raise DropItem("Item contains no photos")
+        item['photo_urls'] = photo_paths
+        return item

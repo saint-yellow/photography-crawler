@@ -8,7 +8,7 @@
 import scrapy
 
 
-class PhotoCollectionItem(scrapy.Item):
+class PhotoSetItem(scrapy.Item):
     '''相片集'''
 
     title = scrapy.Field()
@@ -25,4 +25,5 @@ class PhotoDetailItem(scrapy.Item):
 
     title = scrapy.Field()
     webpage_url = scrapy.Field()
-    photo_url = scrapy.Field()
+    notation = scrapy.Field()
+    photo_urls = scrapy.Field()

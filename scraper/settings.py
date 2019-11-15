@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 #USER_AGENT = 'scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 32
@@ -66,7 +66,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'scraper.pipelines.SihaizixunPipeline': 300,
+   'scraper.pipelines.PhotoSetPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,3 +94,7 @@ ITEM_PIPELINES = {
 import datetime
 LOG_FILE = 'logs/{0}.log'.format(datetime.datetime.now().strftime('%Y-%m-%d'))
 LOG_LEVEL = 'INFO'
+
+
+# Image storing settings
+IMAGES_STORE = 'photos'

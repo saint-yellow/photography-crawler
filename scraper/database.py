@@ -9,8 +9,8 @@ engine = create_engine('mysql+pymysql://root:saint-yellow@localhost:3306/beauty_
 Base = declarative_base()
 
 
-class PhotoCollection(Base):
-    __tablename__ = 'photo_collections'
+class PhotoSet(Base):
+    __tablename__ = 'photo_sets'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(1024), nullable=True)
@@ -29,24 +29,8 @@ class PhotoCollection(Base):
         self.author = author
         self.datetime_published = datetime_published
         self.description = description
-        self.tags = self.tags
+        self.tags = tags        
 
-
-class PhotoDetail(Base):
-    __tablename__ = 'photo_details'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String(1024), nullable=True)
-    webpage_url = Column(String(1024), nullable=True)
-    photo_url = Column(String(1024), nullable=True)
-    datetime_crawled = Column(DateTime(), default=datetime.now)
-
-    def __init__(self, title, webpage_url, photo_url):
-        self.title = title
-        self.webpage_url = webpage_url
-        self.photo_url = photo_url
-
-        
-
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
