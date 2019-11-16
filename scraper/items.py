@@ -20,7 +20,7 @@ class PhotoSetItem(scrapy.Item):
     description = scrapy.Field()
 
 
-class PhotoDetailItem(scrapy.Item):
+class PhotoItem(scrapy.Item):
     '''相片'''
 
     title = scrapy.Field()
