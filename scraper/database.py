@@ -31,6 +31,5 @@ class PhotoSet(Base):
         self.description = description
         self.tags = tags        
 
-Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
