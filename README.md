@@ -40,24 +40,28 @@
 │       └── __pycache__
 ├── scrapy.cfg
 ```
-`logs`文件夹存放爬虫的运行日志  
-`photos`文件夹存放爬虫下载的图片
-`scraper`文件夹存放爬虫的主要代码
-`scraper/database.py`文件定义了数据库包含的表以及各个表的结构
-`scraper/spiders/photo.py`文件定义了用于爬取图片的`PhotoSpider`类
-`scraper/spiders/photoset.py`文件定义了用于爬取图集信息的`PhotoSetSpider`类
+- `logs`文件夹存放爬虫的运行日志  
+- `photos`文件夹存放爬虫下载的图片
+- `scraper`文件夹存放爬虫的主要代码
+- `scraper/database.py`文件定义了数据库包含的表以及各个表的结构
+- `scraper/spiders/photo.py`文件定义了用于爬取图片的`PhotoSpider`类
+- `scraper/spiders/photoset.py`文件定义了用于爬取图集信息的`PhotoSetSpider`类
 
 ## 代码组织 - One Item, One Spider, One Pipeline
 ```
-    因为本项目旨在完成图集信息入库以及图片下载这两项工作, 
-    所以作者为该两项工作分别配备一个项目, 一只蜘蛛, 一条管道. 具体而言, 即:
+因为本项目旨在完成图集信息入库以及图片下载这两项工作, 所以作者为该两项工作分别配备一个项目, 一只蜘蛛, 一条管道. 具体而言, 即:
 爬取图集(photoset) = PhotoSetItem + PhotoSetSpider + PhotoSetPipeline
 爬取图片(phot) = PhotoItem + PhotoSpider + PhotoPipeline
 ```
 
+## 蜘蛛的职责
+PhotoSetSpider: 爬取图集信息
+
+PhotoSpider: 爬取图片
+
 ## 其他细节
-    - ORM
-    - Referer header
+- ORM
+- Referer header
 
 
 ## 成果
