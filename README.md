@@ -6,7 +6,7 @@
 ![img](introduction/screenshot-001.PNG)
 
 ## 技术栈
-主要是Scrapy结合SQLAlchemy. Scrapy负责爬取网页内容并提取出item, SQLAlcehmy
+主要是Scrapy结合SQLAlchemy. Scrapy爬取网页内容并提取出项目(item), SQLAlcehmy将项目存储在数据库
 
 ## 项目结构
 
