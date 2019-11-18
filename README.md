@@ -56,6 +56,7 @@
 
 ## 蜘蛛的职责
 PhotoSetSpider: 爬取图集信息
+![img](/introduction/screenshot-002.jpg)
 
 PhotoSpider: 爬取图片
 
