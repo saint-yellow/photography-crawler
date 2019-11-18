@@ -2,7 +2,7 @@
 爬虫习作 Nr. 2: 以佳丽摄影作品网站为目标的定向爬取 
 
 ## 目标
-爬取四海资讯图库(https://www.shzx.org/b/12-0.html)的图集信息, 以及下载图集中的图片
+爬取四海资讯图库 (https://www.shzx.org/b/12-0.html) 的图集信息, 以及下载图集中的图片
 ![img](introduction/screenshot-001.PNG)
 
 ## 技术栈
