@@ -3,7 +3,7 @@
 
 ## 目标
 爬取四海资讯图库(https://www.shzx.org/b/12-0.html)的图集信息, 以及下载图集中的图片
-![img]("introduction/screenshot-001.PNG")
+![img](introduction/screenshot-001.PNG)
 
 ## 技术栈
 主要是Scrapy结合SQLAlchemy. Scrapy负责爬取网页内容并提取出item, SQLAlcehmy
