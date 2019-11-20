@@ -56,10 +56,10 @@
 
 ## 蜘蛛的职责
 - PhotoSetSpider: 爬取图集信息
-![img](introduction/screenshot-002.png)
-![img](introduction/screenshot-006.png)
+![img](introduction/screenshot-002.PNG)
+![img](introduction/screenshot-006.PNG)
 - PhotoSpider: 爬取图片
-![img](introduction/screenshot-004.png)
+![img](introduction/screenshot-004.PNG)
 
 ## 其他细节
 - 使用ORM的方式插入图集信息到数据库中
@@ -88,9 +88,9 @@ class PhotoPipeline(ImagesPipeline):
 
 ## 运行结果
 - 爬取图集
-![img](introduction/screenshot-003.png)
+![img](introduction/screenshot-003.PNG)
 - 爬取图片
-![img](introduction/screenshot-007.png)
+![img](introduction/screenshot-007.PNG)
 
 未曾尝试全站爬取, 图示结果仅供参考
 
