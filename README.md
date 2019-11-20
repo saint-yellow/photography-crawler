@@ -63,7 +63,7 @@
 
 ## 其他细节
 - 使用ORM的方式插入图集信息到数据库中
-```
+```python
 class PhotoSetPipeline(object):
     def process_item(self, item, spider: Spider):
         record = PhotoSet(
@@ -78,7 +78,7 @@ class PhotoSetPipeline(object):
         self.session.commit()
 ```
 - 在下载图片的请求中加入Referer首部, 降低图片下载失败的概率
-```
+```python
 class PhotoPipeline(ImagesPipeline):
     def get_media_requests(self, item: PhotoItem, info):
         for photo_url in item['photo_urls']:
