@@ -34,6 +34,12 @@ class PhotoSetSpider(CrawlSpider):
         ),
     ]
 
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'scraper.pipelines.PhotoSetPipeline': 300,
+        }
+    }
+
     def parse_item(self, response: Response):
         item = PhotoSetItem()
         item['title'] = response.xpath('//div[@class="title"]/h1/text()').extract()[0]
