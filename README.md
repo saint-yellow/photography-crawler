@@ -130,5 +130,5 @@ class PhotoPipeline(ImagesPipeline):
 
 ## 参考文献
 [1] Web Scraping with Python, Second Edition by Ryan Mitchell (O'Reilly). Copyright 2018 Ryan Mitchell, 978-1-491-998557-1.  
-[2] Essemtial SQLAlchemy, Second Edition, by Jason Myers and Rick Copeland (O'Reilly). Copyright 2016 Jason Myers and Rick Copeland, 978-1-4919-1646-9.
+[2] Essemtial SQLAlchemy, Second Edition, by Jason Myers and Rick Copeland (O'Reilly). Copyright 2016 Jason Myers and Rick Copeland, 978-1-4919-1646-9.  
 [3] Learning Scrapy, by Dimitrios Kouzis-Loukas (Packt Publishing). Copyright 2016 Packt Publishing, 978-7-115-47420-9.
