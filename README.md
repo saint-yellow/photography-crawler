@@ -25,6 +25,7 @@
 │           ├── 162-2550-1573929592.jpg
 │           └── 162-2550-1573929596.jpg
 ├── README.md
+├── run.py
 ├── scraper
 │   ├── database.py
 │   ├── __init__.py
@@ -84,6 +85,21 @@ class PhotoPipeline(ImagesPipeline):
         for photo_url in item['photo_urls']:
             yield Request(photo_url, meta={'name': item['notation']}, headers={'Referer': item['webpage_url']})
 ```
+
+## 运行方法
+- 单独运行单个蜘蛛
+
+![img](introduction/screenshot-008.PNG)
+![img](introduction/screenshot-009.PNG)
+
+- 同时运行多个蜘蛛
+
+![img](introduction/screenshot-010.PNG)
+
+
+运行结果存放在`logs`文件夹中以日期命名的日志文件内, 例如: 2019-11-11.log  
+具体命名视乎运行日期
+
 
 
 ## 运行结果
