@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from scrapy.http import Response
+from scrapy.http import Response, Request
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scraper.items import PhotoItem
@@ -34,7 +34,7 @@ class PhotoSpider(CrawlSpider):
     ]
     custom_settings = {
         'ITEM_PIPELINES': {
-            'scraper.pipelines.PhotoPipeline': 400,
+            'scraper.pipelines.PhotoPipeline': 300,
         }
     }
 
@@ -45,4 +45,8 @@ class PhotoSpider(CrawlSpider):
         item['webpage_url'] = response.url
         item['notation'] = re.findall(r'\d+-\d+', response.url)[0]
         item['photo_urls'] = response.xpath('//div[@class="picture"]/p/img[@alt="{0}"]/@src'.format(title)).extract()
-        return item
+        yield item
+
+        next_page = response.xpath('//div[@class="paging"]/a[text() = "下一页"]/@href').extract()
+        if next_page is not None and len(next_page) >= 1:
+            yield Request(response.urljoin(next_page[0]), callback=self.parse_item)
