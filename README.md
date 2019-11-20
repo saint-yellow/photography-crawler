@@ -56,15 +56,44 @@
 
 ## 蜘蛛的职责
 - PhotoSetSpider: 爬取图集信息
+![img](introduction/screenshot-002.png)
+![img](introduction/screenshot-006.png)
 - PhotoSpider: 爬取图片
-![img](/introduction/screenshot-002.jpg)
+![img](introduction/screenshot-004.png)
 
 ## 其他细节
-- ORM
-- Referer header
+- 使用ORM的方式插入图集信息到数据库中
+```
+class PhotoSetPipeline(object):
+    def process_item(self, item, spider: Spider):
+        record = PhotoSet(
+            url=item['url'],
+            title=item['title'], 
+            author=item['author'],
+            source=item['source'], 
+            datetime_published=item['datetime_published'],
+            description=item['description'],
+            tags=item['tags'])
+        self.session.add(record)
+        self.session.commit()
+```
+- 在下载图片的请求中加入Referer首部, 降低图片下载失败的概率
+```
+class PhotoPipeline(ImagesPipeline):
+    def get_media_requests(self, item: PhotoItem, info):
+        for photo_url in item['photo_urls']:
+            yield Request(photo_url, meta={'name': item['notation']}, headers={'Referer': item['webpage_url']})
+```
 
 
-## 成果
+## 运行结果
+- 爬取图集
+![img](introduction/screenshot-003.png)
+- 爬取图片
+![img](introduction/screenshot-007.png)
+
+未曾尝试全站爬取, 图示结果仅供参考
+
 
 
 ## 存在的缺陷
@@ -79,8 +108,5 @@
 
 ## 可能会做的扩展
 - 添加其他目标网站, 例如妹子图 (https://www.jdlingyu.mobi/collection/meizitu), 新闻吧 (https://www.jdlingyu.mobi/collection/meizitu) 等. 爬取不同的网站, 重用相同的Items
+- 分布式
 - etc.
-
-
-## 结语
-这车一般
