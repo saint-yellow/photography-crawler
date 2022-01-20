@@ -1,5 +1,5 @@
 # saint-yellow/beauty-photography
-爬虫习作 Nr. 2: 以佳丽摄影作品网站为目标的定向爬取 
+爬虫习作 Nr. 2: 以图片网站为目标的定向爬取
 
 ## 目标
 爬取四海资讯图库 (https://www.shzx.org/b/12-0.html) 的图集信息以及图片
